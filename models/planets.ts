@@ -1,3 +1,5 @@
+import * as log from 'https://deno.land/std/log/mod.ts';
+
 import { join } from 'https://deno.land/std/path/mod.ts';
 import { parse } from 'https://deno.land/std/encoding/csv.ts';
 import { BufReader } from 'https://deno.land/std/io/bufio.ts';
@@ -52,7 +54,7 @@ async function loadPlanetsData() {
 }
 
 planets = await loadPlanetsData();
-console.log(`${planets.length} habitable planets found!`);
+log.info(`${planets.length} habitable planets found!`);
 
 export function getAllPlanets() {
   return planets;
