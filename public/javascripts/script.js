@@ -1,4 +1,5 @@
-let launches = [];
+// @ts-nocheck
+let launches;
 
 const numberHeading = 'No.'.padStart(5);
 const dateHeading = 'Date'.padEnd(15);
@@ -20,15 +21,14 @@ function loadLaunches() {
 }
 
 function loadPlanets() {
-  // TODO: Once API is ready.
-  const planets = [
-    { kepler_name: 'X Æ A-12' },
-    { kepler_name: 'Beta Gamma B' },
-  ];
-  const planetSelector = document.getElementById('planets-selector');
-  planets.forEach((planet) => {
-    planetSelector.innerHTML += `<option value="${planet.kepler_name}">${planet.kepler_name}</option>`;
-  });
+  return fetch('/planets')
+    .then((planetsResponse) => planetsResponse.json())
+    .then((planets) => {
+      const planetSelector = document.getElementById('planets-selector');
+      planets.forEach((planet) => {
+        planetSelector.innerHTML += `<option value="${planet.kepler_name}">${planet.kepler_name}</option>`;
+      });
+    });
 }
 
 function abortLaunch() {
